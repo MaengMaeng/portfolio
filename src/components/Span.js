@@ -29,7 +29,7 @@ const Name = styled.span`
     font-weight: bold;
 `;
 
-const Highlight = styled.span`
+const Tag = styled.span`
     color:#4758fc;
 `;
 
@@ -70,9 +70,9 @@ const Span = ({text1, text2, text3, text4, text5}) => {
         <Container>
             <Line>{lineText}</Line>
             {lineText.length === text1.length ? <br/> : ''}
-            <Highlight>{lineText2}</Highlight>
+            <Tag>{lineText2}</Tag>
             <Name>{lineText3}</Name>
-            <Highlight>{lineText4}</Highlight>
+            <Tag>{lineText4}</Tag>
             <Line>{lineText5}</Line>
             <KeyboardCursor>|</KeyboardCursor>
         </Container>

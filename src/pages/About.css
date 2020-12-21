@@ -1,0 +1,135 @@
+.current{
+    visibility: visible !important;
+    z-index: 1;
+    /* display: flex !important; */
+    /* background: white !important; */
+}
+
+
+@keyframes scaleInDown{
+    0% {
+        opacity: 1;
+        transform: translate3d(0, -100%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes scaleOutUp{
+    0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 100%, 0);
+    }
+}
+
+@keyframes scaleInUp{
+    0% {
+        opacity: 1;
+        transform: translate3d(0, 100%, 0);
+    }
+  
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes scaleOutDown{
+    0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+
+
+.layout{
+    width: calc(100% - 300px) !important;
+    position: relative !important;
+    overflow: hidden !important;
+
+    background: #252525;
+}
+
+.down{
+    animation: scaleInDown .2s ease-out both;
+}
+
+.down-out{
+    animation: scaleOutUp .2s ease-out both;
+}
+
+.up{
+    animation: scaleInUp .2s ease-out both;
+}
+
+.up-out{
+    animation: scaleOutDown .2s ease-out both;
+}
+
+.history{
+    margin: 40px 0 40px 0;
+}
+
+.history-line{
+    display: flex;
+
+    /* justify-content: space-between; */
+    align-items: center;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    margin: 16px;
+}
+
+.history-month{
+    width: 40px;
+    height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 4px;
+    background: #4758fc;
+}
+
+.history-info{
+    height: 30px;
+
+    margin: 0 0 0 16px;
+    padding: 0 0 0 8px;
+    flex-grow: 1;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 4px;
+    /* background: cornflowerblue; */
+}
+
+.history-end{
+    height: 30px;
+
+    margin: 0 16px 0 16px;
+    padding: 0 8px 0 8px;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 4px;
+    background: cornflowerblue;
+}
