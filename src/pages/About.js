@@ -7,7 +7,7 @@ import Layout from '../components/Layout';
 import {HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, VUE_ICON, NODE_ICON} from '../asset/skills';
 import CHECK_ICON from '../asset/check-white.png';
 
-// import './About.css';
+import './About.css';
 
 // import History from '../components/History';
 
@@ -15,8 +15,25 @@ const Container = styled.div`
     display: flex;
 
     background: #252525; 
-
+    /* background: ${props => props.bg}; */
     height:100%;
+    width: 100%;
+
+    position: absolute;
+`;
+
+const FullDiv = styled.div`
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    color:white;
 `;
 
 const LeftDiv = styled.div`
@@ -135,7 +152,7 @@ const NameDiv = styled.div`
 const ContentsDiv = styled.div`
     /* background: white; */
     overflow: hidden;
-    color:#252525;
+    color:white;
 
     /* border-radius */
     flex-grow: 1;
@@ -193,11 +210,12 @@ const SkillsIcon = styled.img`
 const About = () => {
     const [visible, setVisible] = useState('true');
     
-    // const history = [
-    //     [2020, [['2월', '1번 연혁', '~ 00.00'], ['4월', '2번 연혁', '~ 00.00'],['2월', '1번 연혁', '~ 00.00'], ['4월', '2번 연혁', '~ 00.00']]], 
-    //     [2019, [['5월','1번 연혁', '~ 00.00'], ['7월','2번 연혁', '~ 00.00']]],
-    //     [2018, [['7월','1번 연혁', '~ 00.00'], ['8월','2번 연혁', '~ 00.00'], ['9월','2번 연혁', '~ 00.00']]],
-    // ];
+    const history = [
+        [2019, [['9월','청년 TLO', '~ 2019.11'], ['12월','카카오 인턴', '~ 2020.02']]],
+        [2018, [['12월','SSAFY', '~ 2019.07']]],
+        [2013, [['3월','충남대학교 (컴퓨터 공학과)', '~ 2019.03']]],
+        [2010, [['3월','부여 고등학교', '~ 2013.02']]],
+    ];
 
     const frontend = [
         ['HTML', HTML_ICON],
@@ -212,8 +230,8 @@ const About = () => {
     ]
 
     return (
-        <Layout>
-            <Container className={visible?'current' : ''} onClick={() => setVisible(!visible)}>
+        <Layout className={'layout'}>
+            <Container className={visible?'current down' : 'up-out'} onClick={() => setVisible(!visible)} bg={'#60d7a9'}>
                 <LeftDiv>
                     <Layered>
                         <Headshot src={picture}/>
@@ -276,8 +294,45 @@ const About = () => {
 
                 </RightDiv>
             </Container>
-            <Container className={visible?'current' : ''} onClick={() => setVisible(!visible)}>
-
+            <Container className={(!visible?'current up' : 'down-out')} onClick={() => setVisible(!visible)} bg={'#7bb7fa'}>
+                <FullDiv>
+                    <Layered1>
+                        <NameDiv>
+                            <Name><Tag>{'<'}</Tag>History<Tag>{'/>'}</Tag></Name>
+                        </NameDiv>
+                        <ContentsDiv>
+                            {
+                                history.map((v, i) => (
+                                    <div className='history' key={i}>
+                                        <SkillHeader>
+                                            <SkillHeaderIcon src={CHECK_ICON}></SkillHeaderIcon>
+                                            <Job>
+                                                {v[0]}
+                                            </Job>
+                                            <SkillHeaderLine></SkillHeaderLine>
+                                        </SkillHeader>
+    
+                                        {
+                                            v[1].map((vv, ii) => (
+                                                <div className='history-line' key={`${i}${ii}`}>
+                                                    <div className='history-month'>
+                                                        {vv[0]}
+                                                    </div>
+                                                    <div className='history-info'>
+                                                        {vv[1]}
+                                                    </div>
+                                                    <div className='history-end'>
+                                                        {vv[2]}
+                                                    </div>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                ))
+                            }
+                        </ContentsDiv>
+                    </Layered1>
+                </FullDiv>
             </Container>
         </Layout>
     )
