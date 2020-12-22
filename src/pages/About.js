@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import picture from '../asset/user.png';
-import keyboard from '../asset/keyboard.png';
-import Layout from '../components/Layout';
 
+import {Layout, Text} from '../components/Styled';
+
+import {KEYBOARD_ICON, USER_ICON, CHECK_WHITE_ICON} from '../asset';
 import {HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, VUE_ICON, NODE_ICON} from '../asset/skills';
-import CHECK_ICON from '../asset/check-white.png';
 
 import './About.css';
 
@@ -15,28 +14,13 @@ const Container = styled.div`
     display: flex;
 
     background: #252525; 
-    /* background: ${props => props.bg}; */
     height:100%;
     width: 100%;
 
     position: absolute;
 `;
 
-const FullDiv = styled.div`
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    color:white;
-`;
-
-const LeftDiv = styled.div`
+const StyledSection = styled.div`
     width: 50%;
     height: 100%;
 
@@ -45,119 +29,87 @@ const LeftDiv = styled.div`
     flex-direction: column;
 
     justify-content: center;
-    align-items: center;
 
     color:white;
+
+    &.left{
+        align-items: center;
+    };
+
+    &.right{
+        align-items: flex-start;
+    };
+
+    &.full{
+        width: 100%;
+        align-items: center;
+    }
 `;
 
-const RightDiv = styled.div`
-    width: 50%;
-    height: 100%;
+const StyledDiv = styled.div`
+    &.introduce{
+        margin-top: 30px;
+        text-align: center;
+    }
 
-    display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
+    &.info{
+        display: flex;
 
-    justify-content: center;
-    align-items: flex-start;
+        justify-content: center;
+        align-items: center;
+    }
 
-    color:white;
-`;
-
-const Headshot = styled.img`
-    width: 250px;
-    height: 250px;
-    margin: 20px 0 60px 0;
-`;
-
-const Name = styled.span`
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 40px;
-    font-weight: bold;
-`;
-
-const Job = styled.span`
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 20px;
-    font-weight: 300;
-    letter-spacing: -0.07em;
-`;
-
-const IntroduceDiv = styled.div`
-    margin-top: 30px;
-    text-align: center;
-`;
-
-const IntroduceDiv1 = styled.div`
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-`;
-
-const Introduce = styled.span`
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 18px;
-    font-weight: 300;
-    display: block;
-`;
-
-const Highlight = styled.span`
-    background: linear-gradient(transparent 70%, blue 70%, blue 85%, transparent 85%);
-`;
-
-const Tag = styled.span`
-    color:#4758fc;
+    &.contents{
+        overflow: hidden;
+        flex-grow: 1;
+    }
 `;
 
 const Layered = styled.div`
     height: 70%;
     width: 70%;
-
-    border: 2px solid white;
-    border-radius: 20px;
+    
     display: flex;
-    box-sizing: border-box;
     flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-`;
-
-const Layered1 = styled.div`
-    height: 70%;
-    width: 70%;
-
-    /* border: 2px solid white; */
-    /* border: 3px solid #4758fc; */
+    
     border-radius: 20px;
-    display: flex;
+    
     box-sizing: border-box;
-    flex-direction: column;
-    overflow: hidden;
-
-    /* background: #4758fc; */
-    /* justify-content: center; */
-    /* align-items: center; */
+    
+    &.border{
+        border: 2px solid white;
+    }
+    
+    &.center{
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
-const Keyboard = styled.img`
-    margin: 0 0 4px 8px;
-    width: 28px;
-    height: 28px;
-`;
-const NameDiv = styled.div`
-    margin: 4px;
-`;
-const ContentsDiv = styled.div`
-    /* background: white; */
-    overflow: hidden;
-    color:white;
+const StyledImg = styled.img`
+    &.headshot{
+        width: 250px;
+        height: 250px;
+        margin: 20px 0 60px 0;
+    }
 
-    /* border-radius */
-    flex-grow: 1;
-    /* border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px; */
+    &.info{
+        margin: 0 0 4px 8px;
+        width: 28px;
+        height: 28px;      
+    }
+
+    &.header{
+        width:30px;
+        height:30px;
+
+        margin: 0 16px 0 0;
+    }
+
+    &.skill{
+        height: 80px;
+        width: 80px;
+    }
 `;
 
 const SkillHeader = styled.div`
@@ -167,13 +119,6 @@ const SkillHeader = styled.div`
     align-items: center;
 
     color:white;
-`;
-
-const SkillHeaderIcon = styled.img`
-    width:30px;
-    height:30px;
-
-    margin: 0 16px 0 0;
 `;
 
 const SkillHeaderLine = styled.div`
@@ -190,9 +135,7 @@ const SkillsDiv = styled.div`
     
     padding: 4px;
     
-    /* border: 4px solid white; */
     background: #252525;
-    /* border-radius: 10%; */
 
     display: inline-flex;
     margin: 10px 30px 10px 30px;
@@ -202,10 +145,46 @@ const SkillsDiv = styled.div`
     overflow: hidden;
 `;
 
-const SkillsIcon = styled.img`
-    height: 80px;
-    width: 80px;
+const HistoryDiv = styled.div`
+    display: flex;
+    height: 30px;
+
+    align-items: center;
+
+    margin: 16px;
+
+    &.year{
+        display: block;
+        height: auto;
+        margin: 40px 0 40px 0;
+    }
+
+    &.month{
+        width: 40px;
+
+        justify-content: center;
+
+        border-radius: 4px;
+        background: #4758fc;
+    }
+
+    &.info{
+        margin: 0 0 0 16px;
+        padding: 0 0 0 8px;
+        flex-grow: 1;
+
+        border-radius: 4px;
+    }
+
+    &.end{
+        margin: 0 16px 0 16px;
+        padding: 0 8px 0 8px;
+
+        border-radius: 4px;
+        background: cornflowerblue;
+    }
 `;
+
 
 const About = () => {
     const [visible, setVisible] = useState('true');
@@ -230,109 +209,106 @@ const About = () => {
     ]
 
     return (
-        <Layout className={'layout'}>
-            <Container className={visible?'current down' : 'up-out'} onClick={() => setVisible(!visible)} bg={'#60d7a9'}>
-                <LeftDiv>
-                    <Layered>
-                        <Headshot src={picture}/>
-                        <Name><Tag>{'<'}</Tag>남궁명<Tag>{'/>'}</Tag></Name>
-                        <Job>프론트엔드 개발자</Job>
-                        <IntroduceDiv>
-                            <Introduce>안녕하세요!</Introduce>
-                            <Introduce>개발이 제일 좋은</Introduce>
-                            <IntroduceDiv1>
-                                <Introduce><Highlight>베짱이</Highlight> 개발자입니다!</Introduce>
-                                <Keyboard src={keyboard}></Keyboard>
-                            </IntroduceDiv1>
-                        </IntroduceDiv>
+        <Layout className='layout'>
+            <Container className={visible?'down-in' : 'up-out'} onClick={() => setVisible(!visible)}>
+                <StyledSection className='left'>
+                    <Layered className='border center'>
+                        <StyledImg className='headshot' src={USER_ICON}/>
+                        <Text className='h1'><Text className='tag'>{'<'}</Text>남궁명<Text className='tag'>{'/>'}</Text></Text>
+                        <Text className='h2'>프론트엔드 개발자</Text>
+                        <StyledDiv className='introduce'>
+                            <Text className='introduce'>안녕하세요!</Text>
+                            <Text className='introduce'>개발이 제일 좋은</Text>
+                            <StyledDiv className='info'>
+                                <Text className='introduce'><Text className='underline'>베짱이</Text> 개발자입니다!</Text>
+                                <StyledImg className='info' src={KEYBOARD_ICON}></StyledImg>
+                            </StyledDiv>
+                        </StyledDiv>
 
                     </Layered>
-                </LeftDiv>
-                <RightDiv>
-                <Layered1>
-                    <NameDiv>
-                        <Name><Tag>{'<'}</Tag>Skills<Tag>{'/>'}</Tag></Name>
-                    </NameDiv>
+                </StyledSection>
+                <StyledSection className='right'>
+                    <Layered>
+                        <StyledDiv>
+                            <Text className='h1'>
+                                <Text className='tag'>{'<'}</Text>Skills<Text className='tag'>{'/>'}</Text>
+                            </Text>
+                        </StyledDiv>
 
-                    <ContentsDiv>
-                        <SkillHeader>
-                            <SkillHeaderIcon src={CHECK_ICON}></SkillHeaderIcon>
-                            <Job>
-                                {/* <Highlight>FRONT</Highlight> END */}
-                                FRONT END
-                            </Job>
-                            <SkillHeaderLine></SkillHeaderLine>
-                        </SkillHeader>
-                        {
-                            frontend.map((v, i) => (
-                                <SkillsDiv key={i}>
-                                    <SkillsIcon src={v[1]}></SkillsIcon>
-                                </SkillsDiv>
-                            ))
-                        }
-                    </ContentsDiv>
-                    <ContentsDiv>
-                        <SkillHeader>
-                            <SkillHeaderIcon src={CHECK_ICON}></SkillHeaderIcon>
-                            <Job>
-                                {/* <Highlight>FRONT</Highlight> END */}
-                                BACK END
-                            </Job>
-                            <SkillHeaderLine></SkillHeaderLine>
-                        </SkillHeader>
-                        {
-                            backend.map((v, i) => (
-                                <SkillsDiv key={i}>
-                                    <SkillsIcon src={v[1]}></SkillsIcon>
-                                </SkillsDiv>
-                            ))
-                        }
-                    </ContentsDiv>
-                    {/* <Name>걸어온 길</Name>
-                    <History history={history}></History> */}
-                </Layered1>
-
-                </RightDiv>
-            </Container>
-            <Container className={(!visible?'current up' : 'down-out')} onClick={() => setVisible(!visible)} bg={'#7bb7fa'}>
-                <FullDiv>
-                    <Layered1>
-                        <NameDiv>
-                            <Name><Tag>{'<'}</Tag>History<Tag>{'/>'}</Tag></Name>
-                        </NameDiv>
-                        <ContentsDiv>
+                        <StyledDiv className='contents'>
+                            <SkillHeader>
+                                <StyledImg className='header' src={CHECK_WHITE_ICON}></StyledImg>
+                                <Text className='h2'>
+                                    FRONT END
+                                </Text>
+                                <SkillHeaderLine></SkillHeaderLine>
+                            </SkillHeader>
                             {
-                                history.map((v, i) => (
-                                    <div className='history' key={i}>
+                                frontend.map((v, i) => (
+                                    <SkillsDiv key={i}>
+                                        <StyledImg className='skill' src={v[1]}></StyledImg>
+                                    </SkillsDiv>
+                                ))
+                            }
+                        </StyledDiv>
+                        <StyledDiv className='contents'>
+                            <SkillHeader>
+                                <StyledImg className='header' src={CHECK_WHITE_ICON}></StyledImg>
+                                <Text className='h2'>
+                                    BACK END
+                                </Text>
+                                <SkillHeaderLine></SkillHeaderLine>
+                            </SkillHeader>
+                            {
+                                backend.map((v, i) => (
+                                    <SkillsDiv key={i}>
+                                        <StyledImg className='skill' src={v[1]}></StyledImg>
+                                    </SkillsDiv>
+                                ))
+                            }
+                        </StyledDiv>
+                    </Layered> 
+                </StyledSection>
+            </Container>
+            <Container className={(!visible?'up-in' : 'down-out')} onClick={() => setVisible(!visible)}>
+                <StyledSection className='full'>
+                    <Layered>
+                        <StyledDiv>
+                            <Text className='h1'><Text className='tag'>{'<'}</Text>History<Text className='tag'>{'/>'}</Text></Text>
+                        </StyledDiv>
+                        <StyledDiv>
+                            {
+                                history.map((year, i) => (
+                                    <HistoryDiv className='year' key={i}>
                                         <SkillHeader>
-                                            <SkillHeaderIcon src={CHECK_ICON}></SkillHeaderIcon>
-                                            <Job>
-                                                {v[0]}
-                                            </Job>
+                                            <StyledImg className='header' src={CHECK_WHITE_ICON}></StyledImg>
+                                            <Text className='h2'>
+                                                {year[0]}
+                                            </Text>
                                             <SkillHeaderLine></SkillHeaderLine>
                                         </SkillHeader>
     
                                         {
-                                            v[1].map((vv, ii) => (
-                                                <div className='history-line' key={`${i}${ii}`}>
-                                                    <div className='history-month'>
-                                                        {vv[0]}
-                                                    </div>
-                                                    <div className='history-info'>
-                                                        {vv[1]}
-                                                    </div>
-                                                    <div className='history-end'>
-                                                        {vv[2]}
-                                                    </div>
-                                                </div>
+                                            year[1].map((month, ii) => (
+                                                <HistoryDiv key={`${i}${ii}`}>
+                                                    <HistoryDiv className='month'>
+                                                        <Text>{month[0]}</Text>
+                                                    </HistoryDiv>
+                                                    <HistoryDiv className='info'>
+                                                        <Text>{month[1]}</Text>
+                                                    </HistoryDiv>
+                                                    <HistoryDiv className='end'>
+                                                        <Text>{month[2]}</Text>
+                                                    </HistoryDiv>
+                                                </HistoryDiv>
                                             ))
                                         }
-                                    </div>
+                                    </HistoryDiv>
                                 ))
                             }
-                        </ContentsDiv>
-                    </Layered1>
-                </FullDiv>
+                        </StyledDiv>
+                    </Layered>
+                </StyledSection>
             </Container>
         </Layout>
     )
