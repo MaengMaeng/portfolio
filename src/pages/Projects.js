@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import styled from 'styled-components';
 
-import {Layout, Text} from '../components/Styled';
+import { Layout, Text } from '../components/Styled';
 
-import {MYTIME, PORTFOLIO, ODOC, MYHOME} from '../asset/projects';
-import {KEYBOARD_ICON} from '../asset';
+import { MYTIME, PORTFOLIO, ODOC, MYHOME } from '../asset/projects';
+import { KEYBOARD_ICON } from '../asset';
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
 
     width: 100%;
-    /* height: 100%; */
+    height: 100%;
 
     justify-content: center;
     align-items: center;
@@ -20,20 +20,25 @@ const Container = styled.div`
 const StyledSection = styled.div`
     /* width: 80%; */
     width: 100%;
+    height: 100%;
     /* height: 80%; */
 
     display: flex;
-    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    /* flex-direction: column; */
 
     /* overflow-y: scroll; */
 `;
 
 const ProjectList = styled.div`
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     flex-wrap: wrap;
 
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: center;
     align-items: center;
     align-content: space-around;
 
@@ -152,16 +157,26 @@ const Projects = () => {
         // ['내 친구를 소개합니다.']
     ];
 
-    return (
-        <Layout>
-            <Container>
-                <StyledSection>
-                    <Text className='h1'><Text className='tag'>{'<'}</Text>Projects<Text className='tag'>{'/>'}</Text></Text>
+    const layout = createRef();
 
-                    <ProjectList>
-                        {
-                            projects.map((v, i) => (
-                                <ProjectItem key={i}>
+    const onClickHandle = (i) => {
+        if(i === projects.length - 1){
+            layout.current.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        else{
+            layout.current.scrollTo({ top: (layout.current.scrollHeight /projects.length)*(i+1), behavior: 'smooth' });
+        }
+    }
+
+    return (
+        <Layout ref={layout}>
+            {
+                projects.map((v, i) => (
+                    <Container key={i} onClick={() => onClickHandle(i)}>
+                        <StyledSection>
+                            <ProjectList>
+                        <Text className='h1'><Text className='tag'>{'<'}</Text>{v[0]}<Text className='tag'>{'/>'}</Text></Text>
+                                <ProjectItem>
                                     <Browser>
                                         <SearchBar>
                                             <SearchIcon className='a'></SearchIcon>
@@ -176,12 +191,12 @@ const Projects = () => {
                                         {v[0]}
                                     </ProjectItemInfo> */}
                                 </ProjectItem>
-                            ))
-                        }
-                    </ProjectList>
+                            </ProjectList>
 
-                </StyledSection>
-            </Container>
+                        </StyledSection>
+                    </Container>
+                ))
+            }
         </Layout>
     )
 }

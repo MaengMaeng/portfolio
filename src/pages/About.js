@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { createRef, useState } from 'react';
 import styled from 'styled-components';
 
-import {Layout, Text} from '../components/Styled';
+import { Layout, Text } from '../components/Styled';
 
-import {KEYBOARD_ICON, USER_ICON, CHECK_WHITE_ICON} from '../asset';
-import {HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, VUE_ICON, NODE_ICON} from '../asset/skills';
+import { KEYBOARD_ICON, USER_ICON, CHECK_WHITE_ICON } from '../asset';
+import { HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, VUE_ICON, NODE_ICON } from '../asset/skills';
 
 import './About.css';
 
@@ -17,7 +17,7 @@ const Container = styled.div`
     height:100%;
     width: 100%;
 
-    position: absolute;
+    /* position: absolute; */
 `;
 
 const StyledSection = styled.div`
@@ -188,12 +188,12 @@ const HistoryDiv = styled.div`
 
 const About = () => {
     const [visible, setVisible] = useState('true');
-    
+
     const history = [
-        [2019, [['9월','청년 TLO', '~ 2019.11'], ['12월','카카오 인턴', '~ 2020.02']]],
-        [2018, [['12월','SSAFY', '~ 2019.07']]],
-        [2013, [['3월','충남대학교 (컴퓨터 공학과)', '~ 2019.03']]],
-        [2010, [['3월','부여 고등학교', '~ 2013.02']]],
+        [2019, [['9월', '청년 TLO', '~ 2019.11'], ['12월', '카카오 인턴', '~ 2020.02']]],
+        [2018, [['12월', 'SSAFY', '~ 2019.07']]],
+        [2013, [['3월', '충남대학교 (컴퓨터 공학과)', '~ 2019.03']]],
+        [2010, [['3월', '부여 고등학교', '~ 2013.02']]],
     ];
 
     const frontend = [
@@ -208,12 +208,28 @@ const About = () => {
         ['Node.js', NODE_ICON]
     ]
 
+    const onClickHandle = (direction) => {
+        console.log(layout.current.scrollTop);
+
+        if (direction === 'up') {
+            layout.current.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        else {
+            layout.current.scrollTo({ top: layout.current.scrollHeight, behavior: 'smooth' });
+        }
+
+        setVisible(visible);
+    }
+
+    const layout = createRef();
+
     return (
-        <Layout className='layout'>
-            <Container className={visible?'down-in' : 'up-out'} onClick={() => setVisible(!visible)}>
+        <Layout className='layout' ref={layout}>
+            {/* <Container className={visible?'down-in' : 'up-out'} onClick={() => setVisible(!visible)}> */}
+            <Container onClick={() => onClickHandle('down')}>
                 <StyledSection className='left'>
                     <Layered className='border center'>
-                        <StyledImg className='headshot' src={USER_ICON}/>
+                        <StyledImg className='headshot' src={USER_ICON} />
                         <Text className='h1'><Text className='tag'>{'<'}</Text>남궁명<Text className='tag'>{'/>'}</Text></Text>
                         <Text className='h2'>프론트엔드 개발자</Text>
                         <StyledDiv className='introduce'>
@@ -267,10 +283,11 @@ const About = () => {
                                 ))
                             }
                         </StyledDiv>
-                    </Layered> 
+                    </Layered>
                 </StyledSection>
             </Container>
-            <Container className={(!visible?'up-in' : 'down-out')} onClick={() => setVisible(!visible)}>
+            {/* <Container className={(!visible?'up-in' : 'down-out')} onClick={() => setVisible(!visible)}> */}
+            <Container onClick={() => onClickHandle('up')}>
                 <StyledSection className='full'>
                     <Layered>
                         <StyledDiv>
@@ -287,7 +304,7 @@ const About = () => {
                                             </Text>
                                             <SkillHeaderLine></SkillHeaderLine>
                                         </SkillHeader>
-    
+
                                         {
                                             year[1].map((month, ii) => (
                                                 <HistoryDiv key={`${i}${ii}`}>
