@@ -1,10 +1,7 @@
 import React, { useRef } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import { StyledButton } from './Styled';
-
-const AAA = styled.div`
-`;
 
 const Layered = styled.div`
     height: 70%;
@@ -27,7 +24,7 @@ const Layered = styled.div`
     }
 `;
 
-const BBB = styled.div`
+const ImageContainer = styled.div`
     width: 100%;
     overflow-x: scroll;
 
@@ -37,7 +34,7 @@ const BBB = styled.div`
     ::-webkit-scrollbar-button { display: none; } /* 스크롤 바 상 하단 버튼 */
 `;
 
-const ProjectItemPicture = styled.div`
+const Image = styled.div`
     width: calc(100% * ${props => props.number});
 
     /* overflow-x: scroll; */
@@ -123,10 +120,10 @@ const SlideImage = ({ images }) => {
 
     return (
         <Layered className='center'>
-            <BBB ref={r}>
-                <ProjectItemPicture number={images.length}>
+            <ImageContainer ref={r}>
+                <Image number={images ? images.length : 0}>
                     {
-                        images.map((vv, ii) => (
+                        images ? images.map((vv, ii) => (
                             <Browser key={ii}>
                                 <SearchBar>
                                     <SearchIcon className='a'></SearchIcon>
@@ -137,13 +134,14 @@ const SlideImage = ({ images }) => {
                                 </SearchBar>
                                 <BrowserContent src={vv}></BrowserContent>
                             </Browser>
-                        ))}
-                </ProjectItemPicture>
-            </BBB>
-            <AAA>
+                        )) : ''
+                    }
+                </Image>
+            </ImageContainer>
+            <div>
                 <StyledButton onClick={() => onClickHandle('left')}>{'<'}</StyledButton>
                 <StyledButton onClick={() => onClickHandle('right')}>{'>'}</StyledButton>
-            </AAA>
+            </div>
         </Layered>
     )
 };

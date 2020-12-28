@@ -2,6 +2,7 @@ import React, { createRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { Layout, Text } from '../components/Styled';
+import ScrollButton from '../components/ScrollButton';
 
 import { KEYBOARD_ICON, USER_ICON, CHECK_WHITE_ICON } from '../asset';
 import { HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, VUE_ICON, NODE_ICON } from '../asset/skills';
@@ -187,8 +188,6 @@ const HistoryDiv = styled.div`
 
 
 const About = () => {
-    const [visible, setVisible] = useState('true');
-
     const history = [
         [2019, [['9월', '청년 TLO', '~ 2019.11'], ['12월', '카카오 인턴', '~ 2020.02']]],
         [2018, [['12월', 'SSAFY', '~ 2019.07']]],
@@ -209,24 +208,21 @@ const About = () => {
     ]
 
     const onClickHandle = (direction) => {
-        console.log(layout.current.scrollTop);
-
-        if (direction === 'up') {
+        if (direction === 0) {
             layout.current.scrollTo({ top: 0, behavior: 'smooth' });
         }
         else {
             layout.current.scrollTo({ top: layout.current.scrollHeight, behavior: 'smooth' });
         }
-
-        setVisible(visible);
     }
 
     const layout = createRef();
 
     return (
         <Layout className='layout' ref={layout}>
-            {/* <Container className={visible?'down-in' : 'up-out'} onClick={() => setVisible(!visible)}> */}
-            <Container onClick={() => onClickHandle('down')}>
+            <ScrollButton layout={layout} number={2}></ScrollButton>
+
+            <Container onClick={() => onClickHandle(0)}>
                 <StyledSection className='left'>
                     <Layered className='border center'>
                         <StyledImg className='headshot' src={USER_ICON} />
@@ -287,7 +283,7 @@ const About = () => {
                 </StyledSection>
             </Container>
             {/* <Container className={(!visible?'up-in' : 'down-out')} onClick={() => setVisible(!visible)}> */}
-            <Container onClick={() => onClickHandle('up')}>
+            <Container onClick={() => onClickHandle(1)}>
                 <StyledSection className='full'>
                     <Layered>
                         <StyledDiv>

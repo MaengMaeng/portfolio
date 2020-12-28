@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { Layout, Text, StyledButton } from '../components/Styled';
 import SlideImage from '../components/SlideImage';
+import ScrollButton from '../components/ScrollButton';
 
 import { MYTIME, PORTFOLIO, ODOC, MYHOME } from '../asset/projects';
 import { CHECK_WHITE_ICON } from '../asset';
@@ -143,59 +144,35 @@ const SkillsDiv = styled.div`
     overflow: hidden;
 `;
 
-const ProjectList = styled.div`
-    display: flex;
-    /* flex-direction: column; */
-    flex-wrap: wrap;
-
-    /* justify-content: space-between; */
-    justify-content: center;
-    align-items: center;
-    align-content: space-around;
-
-    width: 100%;
-    height: 100%;
-
-    /* overflow: hidden; */
-    /* overflow: scroll; */
-`;
-
-const ProjectName = styled.div`
-    width: 100%;
-    height: 20%;
-
-    display: flex;
-    align-items: center;
-`;
-
 const Projects = () => {
-    // [이름, 사진[], 설명, 사용기술[], 데모링크, 코드링크]
+    /*
+        [이름, 사진[], 설명, 사용기술[], 데모링크, 코드링크]
+    */
     const projects = [
-        ['포트폴리오', [PORTFOLIO,MYTIME,ODOC,MYHOME], '포트폴리오 입니다.', [HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON], '', ''],
-        ['MyTime', [MYTIME],'',[HTML_ICON, CSS_ICON, JS_ICON], '', ''],
-        ['ODOC', [ODOC],'',[HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, NODE_ICON]],
+        ['포트폴리오', [PORTFOLIO, MYTIME, ODOC, MYHOME], '포트폴리오 입니다.', [HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON], '', ''],
+        ['MyTime', [MYTIME], '', [HTML_ICON, CSS_ICON, JS_ICON], '', ''],
+        ['ODOC', [ODOC], '', [HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, NODE_ICON]],
         ['MyHome', [MYHOME], '', [HTML_ICON, CSS_ICON, JS_ICON, VUE_ICON]],
-        // ['내 친구를 소개합니다.']
+        ['MyHome', [MYHOME], '', [HTML_ICON, CSS_ICON, JS_ICON, VUE_ICON]],
+        ['MyHome', [MYHOME], '', [HTML_ICON, CSS_ICON, JS_ICON, VUE_ICON]],
+        ['MyHome', [MYHOME], '', [HTML_ICON, CSS_ICON, JS_ICON, VUE_ICON]],
     ];
 
     const layout = createRef();
 
     const onClickHandle = (i) => {
-        console.log(i, 'layout',layout.current);
-        if (i === projects.length - 1) {
-            layout.current.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        else {
-            layout.current.scrollTo({ top: (layout.current.scrollHeight / projects.length) * (i + 1), behavior: 'smooth' });
-        }
+        const unit = layout.current.scrollHeight / projects.length;
+
+        layout.current.scrollTo({ top: unit * i, behavior: 'smooth' });
     }
 
     return (
         <Layout ref={layout}>
+            <ScrollButton layout={layout} number={projects.length}></ScrollButton>
+            
             {
                 projects.map((v, i) => (
-                    // <Container key={i} onClick={() => onClickHandle(i)}>
-                    <Container key={i}>
+                    <Container key={i} onClick={() => onClickHandle(i)}>
                         <StyledSection className='left'>
                             <SlideImage images={v[1]}></SlideImage>
                         </StyledSection>
@@ -233,12 +210,11 @@ const Projects = () => {
                                         <Text className='h2'>Demo</Text>
                                         <SkillHeaderLine></SkillHeaderLine>
                                     </SkillHeader>
-                                    <StyledButton class='demo'>DEMO</StyledButton>
-                                    <StyledButton class='code'>CODE</StyledButton>
+                                    <StyledButton className='demo'>DEMO</StyledButton>
+                                    <StyledButton className='code'>CODE</StyledButton>
                                 </StyledDiv>
                             </Layered>
                         </StyledSection>
-
                     </Container>
                 ))
             }

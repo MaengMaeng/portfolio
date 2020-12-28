@@ -58,7 +58,7 @@ export const StyledButton = styled.button`
     width: 80px;
     height: 60px;
     
-    border: 2px solid white;
+    border: none;
     border-radius: 8px;
     margin: 4px;
 
@@ -68,6 +68,9 @@ export const StyledButton = styled.button`
     transition-duration: 0.5s;
     transition-timing-function: ease;
 
+    font-size: 20px;
+    font-weight: bold;
+    
     color: black;
 
     &:hover{
