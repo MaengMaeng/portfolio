@@ -53,3 +53,34 @@ export const Text = styled.span`
         display: block;
     }
 `;
+
+export const StyledButton = styled.button`
+    width: 80px;
+    height: 60px;
+    
+    border: 2px solid white;
+    border-radius: 8px;
+    margin: 4px;
+
+    background-color: white;
+    
+    transition-property: color, background-color;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+
+    color: black;
+
+    &:hover{
+        background-color: #4758fc;
+
+        color:white;
+    }
+
+    &.demo{
+
+    }
+
+    &.code{
+
+    }
+`;

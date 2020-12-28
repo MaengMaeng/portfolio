@@ -1,7 +1,8 @@
 import React, { createRef } from 'react';
 import styled from 'styled-components';
 
-import { Layout, Text } from '../components/Styled';
+import { Layout, Text, StyledButton } from '../components/Styled';
+import SlideImage from '../components/SlideImage';
 
 import { MYTIME, PORTFOLIO, ODOC, MYHOME } from '../asset/projects';
 import { CHECK_WHITE_ICON } from '../asset';
@@ -159,86 +160,6 @@ const ProjectList = styled.div`
     /* overflow: scroll; */
 `;
 
-const ProjectItemPicture = styled.div`
-    /* width: calc(100% - 10%);
-    padding-bottom: calc(100% - 10%);
-    margin: 2.5% 5% 2.5% 5%; */
-    
-    width: 100%;
-
-    height: 0;
-
-    display: inline-flex;
-    position: relative;
-`;
-
-const ProjectItemInfo = styled.div`
-    width: 50%;
-    height: 100%;
-    background: rgba(0,0,0,1);
-
-    color: white;
-`;
-
-const Browser = styled.div`
-    box-sizing: border-box;
-    border: 4px solid #4d4d4d;
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    position: absolute;
-    overflow: hidden;
-
-    border-radius: 16px;
-
-    top: 50%;
-    transform: translateY(-50%);
-`;
-
-const SearchBar = styled.div`
-    background: #4d4d4d;
-
-    /* height: 20px; */
-
-    display: flex;
-
-    align-items: center;
-
-    padding: 4px;
-`;
-
-const SearchIcon = styled.div`
-    width: 12px;
-    height: 12px;
-
-    border-radius: 50%;
-
-    margin: 6px;
-
-    &.a{
-        background: #f7595c;
-    }
-    &.b{
-        background: #fcce3f;
-    }
-    &.c{
-        background: #38cd49;
-        
-    }
-`;
-
-const SearchText = styled.div`
-    margin: 0 16px 0 16px;
-    flex-grow: 1;
-    border-top: 4px solid white;
-`;
-
-const BrowserContent = styled.img`
-    width: 100%;
-`;
-
 const ProjectName = styled.div`
     width: 100%;
     height: 20%;
@@ -247,49 +168,20 @@ const ProjectName = styled.div`
     align-items: center;
 `;
 
-const StyledButton = styled.button`
-    width: 80px;
-    height: 60px;
-    
-    border: 2px solid white;
-    border-radius: 8px;
-    margin: 4px;
-
-    background-color: white;
-    
-    transition-property: color, background-color;
-    transition-duration: 0.5s;
-    transition-timing-function: ease;
-
-    color: black;
-
-    &:hover{
-        background-color: #4758fc;
-
-        color:white;
-    }
-
-    &.demo{
-
-    }
-
-    &.code{
-
-    }
-`;
-
 const Projects = () => {
+    // [이름, 사진[], 설명, 사용기술[], 데모링크, 코드링크]
     const projects = [
-        ['포트폴리오', PORTFOLIO, '포트폴리오 입니다.', [HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON]],
-        ['MyTime', MYTIME,'',[HTML_ICON, CSS_ICON, JS_ICON]],
-        ['ODOC', ODOC,'',[HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, NODE_ICON]],
-        ['MyHome', MYHOME, '', [HTML_ICON, CSS_ICON, JS_ICON, VUE_ICON]],
+        ['포트폴리오', [PORTFOLIO,MYTIME,ODOC,MYHOME], '포트폴리오 입니다.', [HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON], '', ''],
+        ['MyTime', [MYTIME],'',[HTML_ICON, CSS_ICON, JS_ICON], '', ''],
+        ['ODOC', [ODOC],'',[HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, NODE_ICON]],
+        ['MyHome', [MYHOME], '', [HTML_ICON, CSS_ICON, JS_ICON, VUE_ICON]],
         // ['내 친구를 소개합니다.']
     ];
 
     const layout = createRef();
 
     const onClickHandle = (i) => {
+        console.log(i, 'layout',layout.current);
         if (i === projects.length - 1) {
             layout.current.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -302,23 +194,10 @@ const Projects = () => {
         <Layout ref={layout}>
             {
                 projects.map((v, i) => (
-                    <Container key={i} onClick={() => onClickHandle(i)}>
+                    // <Container key={i} onClick={() => onClickHandle(i)}>
+                    <Container key={i}>
                         <StyledSection className='left'>
-                            <Layered className='center'>
-                                <ProjectItemPicture>
-                                    <Browser>
-                                        <SearchBar>
-                                            <SearchIcon className='a'></SearchIcon>
-                                            <SearchIcon className='b'></SearchIcon>
-                                            <SearchIcon className='c'></SearchIcon>
-
-                                            <SearchText></SearchText>
-                                        </SearchBar>
-                                        <BrowserContent src={v[1]}></BrowserContent>
-                                    </Browser>
-                                </ProjectItemPicture>
-
-                            </Layered>
+                            <SlideImage images={v[1]}></SlideImage>
                         </StyledSection>
                         <StyledSection className='right'>
                             <Layered>
