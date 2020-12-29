@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Layout, Text } from '../components/Styled';
 import ScrollButton from '../components/ScrollButton';
 
-import { KEYBOARD_ICON, USER_ICON, CHECK_WHITE_ICON } from '../asset';
+import { KEYBOARD_ICON, USER_ICON, CHECK_WHITE_ICON } from '../asset/icon';
 import { HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, VUE_ICON, NODE_ICON } from '../asset/skills';
 
 import './About.css';
