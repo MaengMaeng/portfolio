@@ -5,9 +5,13 @@ import { Layout, Text, StyledButton } from '../components/Styled';
 import SlideImage from '../components/SlideImage';
 import ScrollButton from '../components/ScrollButton';
 
-import { MYTIME, PORTFOLIO, ODOC, MYHOME } from '../asset/projects';
-import { CHECK_WHITE_ICON } from '../asset';
+import { CHECK_WHITE_ICON } from '../asset/icon';
 import { HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, VUE_ICON, NODE_ICON } from '../asset/skills';
+
+import { PORTFOLIO_HOME, PORTFOLIO_ABOUT} from '../asset/projects/portfolio';
+import { ODOC_HOME } from '../asset/projects/odoc';
+import { MYTIME_HOME } from '../asset/projects/mytime';
+import { MYHOME_HOME } from '../asset/projects/myhome';
 
 const Container = styled.div`
     display: flex;
@@ -149,13 +153,10 @@ const Projects = () => {
         [이름, 사진[], 설명, 사용기술[], 데모링크, 코드링크]
     */
     const projects = [
-        ['포트폴리오', [PORTFOLIO, MYTIME, ODOC, MYHOME], '포트폴리오 입니다.', [HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON], '', ''],
-        ['MyTime', [MYTIME], '', [HTML_ICON, CSS_ICON, JS_ICON], '', ''],
-        ['ODOC', [ODOC], '', [HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, NODE_ICON]],
-        ['MyHome', [MYHOME], '', [HTML_ICON, CSS_ICON, JS_ICON, VUE_ICON]],
-        ['MyHome', [MYHOME], '', [HTML_ICON, CSS_ICON, JS_ICON, VUE_ICON]],
-        ['MyHome', [MYHOME], '', [HTML_ICON, CSS_ICON, JS_ICON, VUE_ICON]],
-        ['MyHome', [MYHOME], '', [HTML_ICON, CSS_ICON, JS_ICON, VUE_ICON]],
+        ['포트폴리오', [PORTFOLIO_HOME, PORTFOLIO_ABOUT], '포트폴리오 입니다.', [HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON], '', ''],
+        ['ODOC', [ODOC_HOME], '', [HTML_ICON, CSS_ICON, JS_ICON, REACT_ICON, NODE_ICON]],
+        ['MyTime', [MYTIME_HOME], '', [HTML_ICON, CSS_ICON, JS_ICON], '', ''],
+        ['MyHome', [MYHOME_HOME], '', [HTML_ICON, CSS_ICON, JS_ICON, VUE_ICON]],
     ];
 
     const layout = createRef();

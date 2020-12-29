@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import {UP_ARROW_ICON} from '../asset';
+import {UP_ARROW_ICON} from '../asset/icon';
 
 const Container = styled.div`
     position: fixed;

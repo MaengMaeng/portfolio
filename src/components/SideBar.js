@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import BlogIcon from '../asset/blog-white.png';
-import GithubIcon from '../asset/github-white.png';
+import { BLOG_WHITE_ICON, GITHUB_WHITE_ICON} from '../asset/icon';
 
 const Container = styled.div`
     display: flex;
@@ -110,10 +109,10 @@ const SideBar = () => {
             </Container1>
             <Container2>
                 <ImgContainer>
-                    <Icon src={BlogIcon}></Icon>
+                    <Icon src={BLOG_WHITE_ICON}></Icon>
                 </ImgContainer>
                 <ImgContainer>
-                    <Icon src={GithubIcon}></Icon>
+                    <Icon src={GITHUB_WHITE_ICON}></Icon>
                 </ImgContainer>
             </Container2>
         </Container>
